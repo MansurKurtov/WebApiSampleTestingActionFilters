@@ -4,6 +4,7 @@ using Microsoft.Extensions.Configuration;
 using Microsoft.Extensions.DependencyInjection;
 using Microsoft.Extensions.Hosting;
 using Microsoft.OpenApi.Models;
+using WebApiSampleTestingActionFilters.ActionFilters;
 using WebApiSampleTestingActionFilters.Services.Product;
 
 namespace WebApiSampleTestingActionFilters
@@ -20,6 +21,7 @@ namespace WebApiSampleTestingActionFilters
         // This method gets called by the runtime. Use this method to add services to the container.
         public void ConfigureServices(IServiceCollection services)
         {
+            services.AddScoped<ValidationFilterAction>();
             services.AddScoped<IProductService, ProductService>();
             services.AddControllers();
             services.AddSwaggerGen(c =>

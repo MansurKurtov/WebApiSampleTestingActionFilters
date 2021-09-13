@@ -1,4 +1,6 @@
 ﻿using Microsoft.AspNetCore.Mvc;
+using WebApiSampleTestingActionFilters.ActionFilters;
+using WebApiSampleTestingActionFilters.Models;
 using WebApiSampleTestingActionFilters.Services.Product;
 
 namespace WebApiSampleTestingActionFilters.Controllers
@@ -17,6 +19,13 @@ namespace WebApiSampleTestingActionFilters.Controllers
         public IActionResult GetProducts()
         {
             return _productService.ProductsList();
+        }
+
+        [HttpPost]
+        [ServiceFilter(typeof(ValidationFilterAction))]
+        public IActionResult Add([FromBody] ProductModel product)
+        {
+            return _productService.Insert(product);
         }
     }
 }
